@@ -39,7 +39,109 @@ import React, {Component} from 'react'
 function app() {
     // start app
     // new Router()
-    DOM.render(<p>test 2</p>, document.querySelector('.container'))
+      var timeMachineData = {
+      about: 
+        {
+          cobwebImageUrl: "http://www.pd4pic.com/images/spiderweb-cobweb-spiders-web-creepy-scary-spider.png",
+          timeMachineName: "just a machine bro",
+          year: "2016",
+          imageUrl: "http://orig12.deviantart.net/7d29/f/2011/323/4/f/antique_vintage_pocket_watch_with_map_background_by_eveyd-d4fmi81.png"
+        }
+    }
+
+    var AppView = React.createClass({
+
+    	render: function() {
+        console.log(this)
+    		return (
+    			<div className="container">			
+	    			<h1 className="title">...just a normal box bro</h1> 
+	    			<TimeMachine resultsData={this.props.machineData.about} />
+	    		</div>
+    			)
+    	}
+    })
+
+   	var TimeMachine = React.createClass({
+   	      _timeTravel: function() {
+        if (!this.state.ticking) {
+            var incrementYear = function() {
+              
+                   this.setState({
+                  year: this.state.year + 1,
+                  ticking: true,
+                  tickSymbol: "||",
+                  if (this.state.year > 2022) {
+                      this.setState({
+                  year: this.state.year + 10
+                   })
+                }
+                  
+                })
+                 
+                }
+                  
+           
+          var boundIncrementer = incrementYear.bind(this)
+          this.intervalId = setInterval(boundIncrementer,500)
+        
+      }
+
+        else {
+          clearInterval(this.intervalId)
+          this.setState({
+            tickSymbol: '\u2191',
+            ticking: false
+          })
+        }
+        },
+
+          _backTravel: function() {
+        if (!this.state.ticking) {
+            var decrementYear = function() {
+               this.setState({
+                  year: this.state.year - 1,
+                  ticking: true,
+                  downTickSymbol: "||"
+                 })
+           }
+          var boundDecrementer = decrementYear.bind(this)
+          this.backIntervalId = setInterval(boundDecrementer,500)
+        }
+
+        else {
+          clearInterval(this.backIntervalId)
+          this.setState({
+            downTickSymbol: 'getDown',
+            ticking: false
+          })
+        }
+      },
+        
+
+      getInitialState: function() {
+        return {
+          buttonSymbol: "+",
+          year: 2016 ,
+          tickSymbol: '\u2191',
+          downTickSymbol: 'get Down',
+          ticking: false,
+          cobweb: <img src={this.props.resultsData.cobwebImageUrl}/> ,
+        }
+      },
+
+   		render: function(){
+        console.log(this.state)             
+   			return (
+   				<div className="listing">
+   					<img src={this.props.resultsData.imageUrl} />
+   					<p className="year">What year is it?? {this.state.year}<button onClick={this._backTravel}>{this.state.downTickSymbol}</button><button onClick={this._timeTravel}>{this.state.tickSymbol}</button></p>
+   				</div>
+   				)
+   		}
+   	})
+
+    DOM.render(<AppView id="topView" machineData={timeMachineData} />,document.querySelector('.container'))
 }
 
 app()
