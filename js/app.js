@@ -71,11 +71,6 @@ function app() {
                   year: this.state.year + 1,
                   ticking: true,
                   tickSymbol: "||",
-                  if (this.state.year > 2022) {
-                      this.setState({
-                  year: this.state.year + 10
-                   })
-                }
                   
                 })
                  
