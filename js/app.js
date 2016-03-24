@@ -55,7 +55,7 @@ function app() {
         console.log(this)
     		return (
     			<div className="container">			
-	    			<h1 className="title">...just a normal box bro</h1> 
+	    			<h1 className="title">...just a normal antique watch bro</h1> 
 	    			<TimeMachine resultsData={this.props.machineData.about} />
 	    		</div>
     			)
